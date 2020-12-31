@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "554250824070",
+    "firebase_url": "https://antidotelanguage.firebaseio.com",
+    "project_id": "antidotelanguage",
+    "storage_bucket": "antidotelanguage.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554250824070:android:491c826ceeb1db9410e407",
+        "android_client_info": {
+          "package_name": "com.nooralhuda.antidotelanguagearabic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "554250824070-luufpdut3m14m03h7he2k4b2ha5qr6c5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nooralhuda.antidotelanguagearabic",
+            "certificate_hash": "0e9f5b0469ed02973be615b3022d1406f1cfcfd8"
+          }
+        },
+        {
+          "client_id": "554250824070-ikvspeca3f6rpcaebvntg6s4ctvk9n0i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMMMSDUnGf_lNK4A4MGin2tVCQfV_DKaM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "554250824070-ikvspeca3f6rpcaebvntg6s4ctvk9n0i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
