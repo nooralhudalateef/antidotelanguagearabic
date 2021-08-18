@@ -1,11 +1,15 @@
+import 'package:antidotelanguagearabic/GUI/AboutApp.dart';
+import 'package:antidotelanguagearabic/GUI/AboutCodeForIraq.dart';
+import 'package:antidotelanguagearabic/GUI/Resours.dart';
+import 'package:antidotelanguagearabic/GUI/Subtopics_grammer_sarrf.dart';
 import 'package:antidotelanguagearabic/models/grammar_sarrf.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
-import 'dart:math' as math;
 import 'package:antidotelanguagearabic/utilities/Constants.dart';
 
 class ContentGrammarSarrf extends StatefulWidget {
@@ -26,9 +30,6 @@ class ContentGrammarSarrfState extends State<ContentGrammarSarrf> {
     super.initState();
   }
 
-  final _random = math.Random();
-  SystemUiOverlayStyle _currentStyle = SystemUiOverlayStyle.light;
-  bool _rememberMe = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,17 +37,7 @@ class ContentGrammarSarrfState extends State<ContentGrammarSarrf> {
         // backgroundColor: Color(0xff92D0FF),
         backgroundColor: Colors.deepPurpleAccent,
         centerTitle: true,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.menu,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              aboutAppAlertDialog(context);
-            },
-          )
-        ],
+        actions: <Widget>[],
         title: Text(
           widget.grammar_sarrf.title,
           style: TextStyle(
@@ -57,6 +48,19 @@ class ContentGrammarSarrfState extends State<ContentGrammarSarrf> {
           textAlign: TextAlign.center,
           //textDirection: TextDirection.rtl,
         ),
+
+        leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Subtopicsgrammarsarrf()),
+              );
+            }),
       ),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
@@ -104,6 +108,55 @@ class ContentGrammarSarrfState extends State<ContentGrammarSarrf> {
               ),
             ],
           ),
+        ),
+      ),
+      endDrawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.deepPurpleAccent,
+              ),
+              child: antidotelanguage(),
+            ),
+            CustomListTitle(
+                Icons.phone_android,
+                'عن التطبيق',
+                () => {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AboutApp()),
+                      ),
+                    }),
+            CustomListTitle(
+                Icons.info,
+                'عن المُبادرة',
+                () => {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AboutCodeForIraq()),
+                      ),
+                    }),
+            CustomListTitle(
+                Icons.book,
+                'مصادر الشرح',
+                () => {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Resours()),
+                      ),
+                    }),
+            CustomListTitle(
+              Icons.logout,
+              'تسجيل خروج',
+                  () async {
+                await FirebaseAuth.instance.signOut();
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/Login', (Route<dynamic> route) => false);
+              },
+            ),
+          ],
         ),
       ),
     );

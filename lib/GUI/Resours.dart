@@ -1,6 +1,6 @@
 import 'dart:ui';
+import 'package:antidotelanguagearabic/GUI/AboutApp.dart';
 import 'package:antidotelanguagearabic/GUI/AboutCodeForIraq.dart';
-import 'package:antidotelanguagearabic/GUI/Resours.dart';
 import 'package:antidotelanguagearabic/GUI/Subjectpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,23 +8,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:antidotelanguagearabic/utilities/Constants.dart';
-class AboutApp extends StatefulWidget {
+
+class Resours extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return new AboutAppState();
+    return new ResoursState();
   }
 }
 
-class AboutAppState extends State<AboutApp> {
+class ResoursState extends State<Resours> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurpleAccent,
         centerTitle: true,
-        actions: <Widget>[],
+        actions: <Widget>[
+
+        ],
         title: const Text(
-          'عن التطبيق',
+          'المصادر',
           style: TextStyle(
             color: Colors.white,
             fontFamily: 'El_Messiri',
@@ -38,12 +41,10 @@ class AboutAppState extends State<AboutApp> {
               Icons.arrow_back,
               color: Colors.white,
             ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Subjectpage()),
-              );
-            }),
+            onPressed:(){  Navigator.push( context,
+              MaterialPageRoute(builder: (context) => Subjectpage()),
+            );}
+        ),
       ),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
@@ -103,14 +104,14 @@ class AboutAppState extends State<AboutApp> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 40.0),
+                            SizedBox(height: 60.0),
                             Column(
                               children: [
                                 Row(
                                   textDirection: TextDirection.rtl,
                                   children: <Widget>[
                                     new Text(
-                                      'فكرة التطبيق',
+                                      '1- شرح الآجرومية',
                                       textDirection: TextDirection.rtl,
                                       textAlign: TextAlign.right,
                                       style: TextStyle(
@@ -123,53 +124,49 @@ class AboutAppState extends State<AboutApp> {
                                   ],
                                 ),
                                 new Text(
-                                  'تطبيق ترياق لغة هو تطبيق خاص بشرح دروس اللغة العربية بجميع أقسامها من (إملاء، نحو، الصرف: والبلاغة) بطريقة مُبسطة. يستهدف التطبيق جميع الفئات الطلابية بكل المرحل كونه يحتوي على حميع المواضيع، وكذلك لأي شخص يرغب بتعلم اللغة وقواعدها.',
-                                  textDirection: TextDirection.rtl,
-                                  textAlign: TextAlign.justify,
-                                  style: TextStyle(
-                                    color: Colors.black87,
-                                    fontFamily: 'El_Messiri',
-                                    fontSize: 15.0,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 40.0),
-                            Column(
-                              children: [
-                                Row(
-                                  textDirection: TextDirection.rtl,
-                                  children: <Widget>[
-                                    new Text(
-                                      'تنفيذ',
-                                      textDirection: TextDirection.rtl,
-                                      textAlign: TextAlign.right,
-                                      style: TextStyle(
-                                        color: Colors.deepPurpleAccent,
-                                        fontFamily: 'El_Messiri',
-                                        fontSize: 20.0,
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                new Text(
-                                  'نُور الهُدى لَطِيّف '
-                                  '                                               بكالوريوس علوم حاسبات'
-                                 '                                     العراق _ واسط',
+                                  ' للفضيلة الشيخ العلامة مُحمّد بن صالح العثيمين، طٌبعَ بإشراف مؤسسة الشيخ مُحمد بن صالح العثيمين الخيرية.',
                                   textDirection: TextDirection.rtl,
                                   textAlign: TextAlign.right,
-                                  maxLines: 4,
                                   style: TextStyle(
                                     color: Colors.black87,
                                     fontFamily: 'El_Messiri',
-                                    fontSize: 15.0,
+                                    fontSize: 15.5,
                                   ),
                                 ),
                               ],
                             ),
-                            SizedBox(height: 30.0),
-
+                            SizedBox(height: 20.0),
+                            Column(
+                              children: [
+                                Row(
+                                  textDirection: TextDirection.rtl,
+                                  children: <Widget>[
+                                    new Text(
+                                      '2- مُلخص قواعد اللغة العربية',
+                                      textDirection: TextDirection.rtl,
+                                      textAlign: TextAlign.right,
+                                      style: TextStyle(
+                                        color: Colors.deepPurpleAccent,
+                                        fontFamily: 'El_Messiri',
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                new Text(
+                                  ' لفؤاد نعمة، مرحع كامل لقواعد النحو والصرف أُعد'
+                                  ' بأسلوب شيّق ومُبتكر وبصورة مُبسطة سهلة ومُيتكرة.',
+                                  textDirection: TextDirection.rtl,
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                    color: Colors.black87,
+                                    fontFamily: 'El_Messiri',
+                                    fontSize: 15.5,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       )
@@ -193,31 +190,31 @@ class AboutAppState extends State<AboutApp> {
             CustomListTitle(
                 Icons.phone_android,
                 'عن التطبيق',
-                () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => AboutApp()),
-                      ),
-                    }),
+                    () => {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AboutApp()),
+                  ),
+                }),
             CustomListTitle(
                 Icons.info,
                 'عن المُبادرة',
-                () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => AboutCodeForIraq()),
-                      ),
-                    }),
+                    () => {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AboutCodeForIraq()),
+                  ),
+                }),
             CustomListTitle(
                 Icons.book,
                 'مصادر الشرح',
-                () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Resours()),
-                      ),
-                    }),
+                    () => {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Resours()),
+                  ),
+                }),
             CustomListTitle(
               Icons.logout,
               'تسجيل خروج',

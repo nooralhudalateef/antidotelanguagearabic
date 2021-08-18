@@ -1,3 +1,8 @@
+import 'package:antidotelanguagearabic/GUI/AboutApp.dart';
+import 'package:antidotelanguagearabic/GUI/AboutCodeForIraq.dart';
+import 'package:antidotelanguagearabic/GUI/Resours.dart';
+import 'package:antidotelanguagearabic/GUI/Subtopics_grammar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:antidotelanguagearabic/models/grammar.dart';
@@ -5,9 +10,7 @@ import 'package:flutter/services.dart';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
-import 'dart:math' as math;
 import 'package:antidotelanguagearabic/utilities/Constants.dart';
-import 'package:navigation_dot_bar/navigation_dot_bar.dart';
 
 class ContentGrammar extends StatefulWidget {
   final Grammar grammar;
@@ -22,14 +25,12 @@ class ContentGrammar extends StatefulWidget {
 class ContentGrammarState extends State<ContentGrammar> {
   final studentReference =
       FirebaseDatabase.instance.reference().child('grammar');
+
   void initState() {
     // TODO: implement initState
     super.initState();
   }
 
-  final _random = math.Random();
-  SystemUiOverlayStyle _currentStyle = SystemUiOverlayStyle.light;
-  bool _rememberMe = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,17 +38,7 @@ class ContentGrammarState extends State<ContentGrammar> {
         // backgroundColor: Color(0xff92D0FF),
         backgroundColor: Colors.deepPurpleAccent,
         centerTitle: true,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.menu,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              aboutAppAlertDialog(context);
-            },
-          )
-        ],
+        actions: <Widget>[],
         title: Text(
           widget.grammar.title,
           style: TextStyle(
@@ -58,6 +49,17 @@ class ContentGrammarState extends State<ContentGrammar> {
           textAlign: TextAlign.center,
           //textDirection: TextDirection.rtl,
         ),
+        leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Subtopicsgrammar()),
+              );
+            }),
       ),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
@@ -105,6 +107,55 @@ class ContentGrammarState extends State<ContentGrammar> {
               ),
             ],
           ),
+        ),
+      ),
+      endDrawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.deepPurpleAccent,
+              ),
+              child: antidotelanguage(),
+            ),
+            CustomListTitle(
+                Icons.phone_android,
+                'عن التطبيق',
+                () => {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AboutApp()),
+                      ),
+                    }),
+            CustomListTitle(
+                Icons.info,
+                'عن المُبادرة',
+                () => {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AboutCodeForIraq()),
+                      ),
+                    }),
+            CustomListTitle(
+                Icons.book,
+                'مصادر الشرح',
+                () => {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Resours()),
+                      ),
+                    }),
+            CustomListTitle(
+              Icons.logout,
+              'تسجيل خروج',
+              () async {
+                await FirebaseAuth.instance.signOut();
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/Login', (Route<dynamic> route) => false);
+              },
+            ),
+          ],
         ),
       ),
     );

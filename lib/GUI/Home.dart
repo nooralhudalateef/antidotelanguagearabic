@@ -1,14 +1,37 @@
+import 'dart:async';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-
 class Home extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     return new HomeState();
   }
 }
-
 class HomeState extends State<Home> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+
+  Future<User> getuser() async{
+    return  await _auth.currentUser;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getuser().then((user){
+      if(user.uid !=null){
+        Navigator.of(context).pushNamedAndRemoveUntil('/Subjectpage',(Route<dynamic> route) => false);
+      }
+      else{
+        Navigator.of(context).pushNamedAndRemoveUntil('/Signup',(Route<dynamic> route) => false);
+      }
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -424,6 +447,7 @@ class HomeState extends State<Home> {
           top: 520,
           left: 30,
           right: 30,
+          // ignore: deprecated_member_use
           child: new RaisedButton(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),

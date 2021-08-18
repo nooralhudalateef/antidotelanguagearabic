@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'dart:math' as math;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
@@ -44,9 +43,7 @@ class ForgotPasswordState extends State<ForgotPassword> {
         (onError) => Get.snackbar("Error In Email Reset", onError.message));
   }
 
-  final _random = math.Random();
-  SystemUiOverlayStyle _currentStyle = SystemUiOverlayStyle.light;
-  bool _rememberMe = false;
+
 
   Widget _buildEmailTextField() {
     return Column(
@@ -78,7 +75,7 @@ class ForgotPasswordState extends State<ForgotPassword> {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               suffixIcon: Icon(
-                Icons.person,
+                Icons.email,
                 color: Colors.grey,
               ),
               hintText: 'أدخل البريد الإلكتروني',

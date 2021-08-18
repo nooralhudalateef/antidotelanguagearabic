@@ -1,8 +1,13 @@
 import 'dart:async';
+import 'package:antidotelanguagearabic/GUI/AboutApp.dart';
+import 'package:antidotelanguagearabic/GUI/AboutCodeForIraq.dart';
+
+import 'package:antidotelanguagearabic/GUI/Resours.dart';
+import 'package:antidotelanguagearabic/GUI/Subjectpage.dart';
 import 'package:antidotelanguagearabic/utilities/Constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:antidotelanguagearabic/GUI/Content.dart';
 import 'package:antidotelanguagearabic/models/grammar.dart';
 
 import 'Content_grammar.dart';
@@ -45,13 +50,7 @@ class _SubtopicsgrammarState extends State<Subtopicsgrammar>{
           shadowColor: Colors.grey,
           centerTitle: true,
           actions: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.menu,
-                color: Colors.white,
-              ),
-              onPressed: () { aboutAppAlertDialog(context); },
-            )
+
           ],
           title: const Text(
             'النحو',
@@ -63,6 +62,16 @@ class _SubtopicsgrammarState extends State<Subtopicsgrammar>{
             textAlign: TextAlign.center,
             //textDirection: TextDirection.rtl,
           ),
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+              onPressed:(){  Navigator.push( context,
+                MaterialPageRoute(builder: (context) => Subjectpage()),
+              );}
+          ),
+
         ),
         body: Center(
 
@@ -108,27 +117,61 @@ class _SubtopicsgrammarState extends State<Subtopicsgrammar>{
               }
           ),
         ),
+        endDrawer: Drawer(
+          child: ListView(
+            children: [
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.deepPurpleAccent,
+                ),
+                child: antidotelanguage(),
+              ),
+              CustomListTitle(
+                  Icons.phone_android,
+                  'عن التطبيق',
+                      () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AboutApp()),
+                    ),
+                  }),
+              CustomListTitle(
+                  Icons.info,
+                  'عن المُبادرة',
+                      () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AboutCodeForIraq()),
+                    ),
+                  }),
+              CustomListTitle(
+                  Icons.book,
+                  'مصادر الشرح',
+                      () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Resours()),
+                    ),
+                  }),
+              CustomListTitle(
+                Icons.logout,
+                'تسجيل خروج',
+                    () async {
+                  await FirebaseAuth.instance.signOut();
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      '/Login', (Route<dynamic> route) => false);
+                },
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
   void _onGrammarAdded(Event event){
     setState((){
       items.add(new Grammar.fromSnapShot(event.snapshot));
-    });
-  }
-  //
-  // void _onGrammarUpdated(Event event){
-  //   var oldStudentValue = items.singleWhere((student) => student.id == event.snapshot.key);
-  //   setState((){
-  //     items[items.indexOf(oldStudentValue)] = new Grammar.fromSnapShot(event.snapshot);
-  //   });
-  // }
-
-  void _deleteStudent(BuildContext context, Grammar dictation,int position)async{
-    await GrammarReference.child(dictation.id).remove().then((_){
-      setState(() {
-        items.removeAt(position);
-      });
     });
   }
 
@@ -138,12 +181,5 @@ class _SubtopicsgrammarState extends State<Subtopicsgrammar>{
     );
 
   }
-
-
-  // void _createNewStudent(BuildContext context)async{
-  //   await Navigator.push(context,
-  //     MaterialPageRoute(builder: (context) => StudentScreen(Grammar(null,'', '' ))),
-  //   );
-  // }
 
 }
